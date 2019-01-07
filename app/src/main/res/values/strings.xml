@@ -135,5 +135,7 @@
         <item>Pakishtan</item>
         <item>USA</item>
     </string-array>
+    <string name="title_activity_reg_success">RegSuccess</string>
+    <string name="user_name">User Name</string>
 
 </resources>

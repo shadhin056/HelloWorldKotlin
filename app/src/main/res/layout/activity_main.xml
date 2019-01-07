@@ -25,21 +25,21 @@
                     android:textStyle="bold"/>
 
             <EditText
-                    android:id="@+id/user_name"
+                    android:id="@+id/etxtUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="User Name"
                     android:inputType="text"/>
 
             <EditText
-                    android:id="@+id/nick_name"
+                    android:id="@+id/etxtNickName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Full Name"
                     android:inputType="text"/>
 
             <EditText
-                    android:id="@+id/phone_numer"
+                    android:id="@+id/etxPhoneNumer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_phone"
@@ -51,7 +51,7 @@
 
                 <EditText
 
-                        android:id="@+id/up_birthday"
+                        android:id="@+id/etxBirthday"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/enter_birth_date"
@@ -65,16 +65,16 @@
                         android:id="@+id/calender_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/up_birthday"
-                        android:layout_alignRight="@+id/up_birthday"
-                        android:layout_alignBottom="@+id/up_birthday"
+                        android:layout_alignTop="@+id/etxBirthday"
+                        android:layout_alignRight="@+id/etxBirthday"
+                        android:layout_alignBottom="@+id/etxBirthday"
                         android:background="@drawable/calender"/>
 
             </RelativeLayout>
 
 
             <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/etxEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -83,11 +83,18 @@
             />
 
             <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/etxPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/enter_password"
+                    android:inputType="textWebPassword"/>
+            <EditText
+                    android:id="@+id/reenter_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/enter_password_again"
                     android:inputType="textWebPassword"/>
             />
 
@@ -101,22 +108,16 @@
 
             <Spinner
 
-                    android:id="@+id/SpPresentCountry"
+                    android:id="@+id/spPresentCountry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-            <EditText
-                    android:id="@+id/reenter_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/enter_password_again"
-                    android:inputType="textWebPassword"/>
+
             />
 
             <CheckBox
 
-                    android:id="@+id/chk"
+                    android:id="@+id/chkAgree"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:onClick="itemClicked"
@@ -125,7 +126,7 @@
 
             <RadioGroup
 
-                    android:id="@+id/txtGender"
+                    android:id="@+id/raGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -204,7 +205,7 @@
                     android:weightSum="2">
 
                 <Button
-                        android:id="@+id/submit"
+                        android:id="@+id/btnReg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
@@ -214,7 +215,7 @@
 
 
                 <Button
-                        android:id="@+id/login_btn"
+                        android:id="@+id/btnLogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
