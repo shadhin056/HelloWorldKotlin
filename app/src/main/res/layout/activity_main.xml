@@ -39,7 +39,7 @@
                     android:inputType="text"/>
 
             <EditText
-                    android:id="@+id/etxPhoneNumer"
+                    android:id="@+id/etxtPhoneNumer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_phone"
@@ -51,30 +51,29 @@
 
                 <EditText
 
-                        android:id="@+id/etxBirthday"
+                        android:id="@+id/etxtBirthday"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/enter_birth_date"
                         android:inputType="text"
                         android:paddingRight="40dp"
-                        android:singleLine="true"
-                        android:text="31/12/1990"/>
+                        android:singleLine="true"/>
 
                 <ImageButton
 
                         android:id="@+id/calender_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/etxBirthday"
-                        android:layout_alignRight="@+id/etxBirthday"
-                        android:layout_alignBottom="@+id/etxBirthday"
+                        android:layout_alignTop="@+id/etxtBirthday"
+                        android:layout_alignRight="@+id/etxtBirthday"
+                        android:layout_alignBottom="@+id/etxtBirthday"
                         android:background="@drawable/calender"/>
 
             </RelativeLayout>
 
 
             <EditText
-                    android:id="@+id/etxEmail"
+                    android:id="@+id/etxtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -83,14 +82,14 @@
             />
 
             <EditText
-                    android:id="@+id/etxPassword"
+                    android:id="@+id/etxtPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/enter_password"
                     android:inputType="textWebPassword"/>
             <EditText
-                    android:id="@+id/reenter_password"
+                    android:id="@+id/etxtReEnterPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -231,7 +230,7 @@
                     android:weightSum="3">
 
                 <Button
-                        android:id="@+id/random_input"
+                        android:id="@+id/btnRandomInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
@@ -251,7 +250,7 @@
 
                 <Button
 
-                        android:id="@+id/reset"
+                        android:id="@+id/btnReset"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"

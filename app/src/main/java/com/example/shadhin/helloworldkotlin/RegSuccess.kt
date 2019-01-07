@@ -26,24 +26,23 @@ class RegSuccess : AppCompatActivity() {
         receivingValue()
 
         setSupportActionBar(toolbar)
-        fab.setOnClickListener { view ->
+       /* fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-        }
+        }*/
     }
 
     private fun receivingValue() {
         val intent = intent
         val userName = intent.getStringExtra("etxtUserName")
         val nickName = intent.getStringExtra("etxtNickName")
-        val phoneNumer = intent.getStringExtra("etxPhoneNumer")
-        val birthday = intent.getStringExtra("etxBirthday")
-        val email = intent.getStringExtra("etxEmail")
-        val password = intent.getStringExtra("etxPassword")
+        val phoneNumer = intent.getStringExtra("etxtPhoneNumer")
+        val birthday = intent.getStringExtra("etxtBirthday")
+        val email = intent.getStringExtra("etxtEmail")
+        val password = intent.getStringExtra("etxtPassword")
        // val presentCountry = intent.getStringExtra("spPresentCountry")
        // val agree = intent.getStringExtra("chkAgree")
         //val gender = intent.getStringExtra("raGender")
-
         txtAfterLoginUserNameDisplay!!.text = userName
         txtAfterLoginNameDisplay!!.text = nickName
         txtAfterLoginPhoneDisplay!!.text = phoneNumer
@@ -53,8 +52,6 @@ class RegSuccess : AppCompatActivity() {
        // txtAfterLoginGender!!.text = presentCountry
        // txtAfterLoginCountry!!.text = agree
         //txtAgree!!.text = gender
-
-       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun initView() {
@@ -67,8 +64,6 @@ class RegSuccess : AppCompatActivity() {
         txtAfterLoginGender = findViewById(R.id.txtAfterLoginGender) as TextView
         txtAfterLoginCountry = findViewById(R.id.txtAfterLoginCountry) as TextView
         txtAgree = findViewById(R.id.txtAgree) as TextView
-
-       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }
