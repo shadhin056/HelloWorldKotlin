@@ -22,14 +22,13 @@ import com.android.volley.VolleyError
 import com.android.volley.RequestQueue
 
 
-
 class RestApiCall : AppCompatActivity() {
 
     private var etUserName: EditText? = null
     private var etPassword: EditText? = null
     private var btnSubmitMOD5: Button? = null
     private var btnSubmitSHA2: Button? = null
-    val jsonobj=JSONObject();
+    val jsonobj = JSONObject();
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rest_api_call)
@@ -44,8 +43,8 @@ class RestApiCall : AppCompatActivity() {
             intent.putExtra("etxtUserName", etUserName!!.text.toString())
             intent.putExtra("etxtPassword", etPassword!!.text.toString())
 
-            doApiVollyCall()
-
+            //doApiVollyCall()
+            sendcall()
             startActivity(intent)
         }
         btnSubmitSHA2!!.setOnClickListener {
@@ -53,10 +52,12 @@ class RestApiCall : AppCompatActivity() {
             intent.putExtra("etxtUserName", etUserName!!.text.toString())
             intent.putExtra("etxtPassword", etPassword!!.text.toString())
 
-            doApiVollyCall()
+            // doApiVollyCall()
+            sendcall()
             startActivity(intent)
         }
     }
+
     private fun initView() {
 
         etUserName = findViewById(R.id.etUserName) as EditText
@@ -68,7 +69,7 @@ class RestApiCall : AppCompatActivity() {
     private fun doApiVollyCall() {//getting the record values
         val name = etUserName?.text.toString()
         val genre = etPassword?.text.toString()
-        var url ="http://10.11.201.52:8084/TestWeb/MD5"
+        var url = "http://10.11.201.52:8084/TestWeb/MD5"
         //creating volley string request
         val stringRequest = object : StringRequest(Request.Method.POST, url,
             Response.Listener<String> { response ->
@@ -94,4 +95,36 @@ class RestApiCall : AppCompatActivity() {
         }
         //adding request to queue
         VolleySingleton.instance?.addToRequestQueue(stringRequest)
-    }}
+    }
+
+    fun sendcall() {
+        val name = etUserName?.text.toString()
+        val genre = etPassword?.text.toString()
+        //RequestQueue initialized
+        var mRequestQueue = Volley.newRequestQueue(this)
+        var url = "http://10.11.201.52:8084/TestWeb/MD5"
+        //String Request initialized
+        var mStringRequest = object : StringRequest(Method.POST, url, Response.Listener { response ->
+            Toast.makeText(applicationContext, "Logged In Successfully", Toast.LENGTH_SHORT).show()
+
+
+        }, Response.ErrorListener { error ->
+            Log.i("This is the error", "Error :" + error.toString())
+            Toast.makeText(
+                applicationContext,
+                "Please make sure you enter correct password and username",
+                Toast.LENGTH_SHORT
+            ).show()
+        }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params.put("uname", name)
+                params.put("pass", genre)
+                return params
+            }
+
+        }
+        mRequestQueue!!.add(mStringRequest!!)
+    }
+}
