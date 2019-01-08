@@ -21,6 +21,10 @@
                 android:label="@string/title_activity_reg_success"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".RestApiCall">
+        </activity>
+        <activity android:name=".RegApiSuccess">
+        </activity>
     </application>
 
 </manifest>

@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var btnReg: Button? = null
     private var btnRandomInput: Button? = null
     private var btnReset: Button? = null
+    private var btnRestApiCall: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +63,11 @@ class MainActivity : AppCompatActivity() {
             etxtPassword!!.setText("")
             etxtReEnterPassword!!.setText("")
         }
+
+        btnRestApiCall!!.setOnClickListener {
+            val intent = Intent(this@MainActivity, RestApiCall::class.java)
+            startActivity(intent)
+        }
     }
     private fun initView() {
         etxtUserName = findViewById(R.id.etxtUserName) as EditText
@@ -78,5 +84,6 @@ class MainActivity : AppCompatActivity() {
         btnReg = findViewById(R.id.btnReg) as Button
         btnRandomInput = findViewById(R.id.btnRandomInput) as Button
         btnReset = findViewById(R.id.btnReset) as Button
+        btnRestApiCall = findViewById(R.id.btnRestApiCall) as Button
     }
 }
