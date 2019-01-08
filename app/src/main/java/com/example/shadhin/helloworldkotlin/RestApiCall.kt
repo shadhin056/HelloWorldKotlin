@@ -20,6 +20,9 @@ import java.util.HashMap
 import com.android.volley.AuthFailureError
 import com.android.volley.VolleyError
 import com.android.volley.RequestQueue
+import android.provider.SyncStateContract.Helpers.update
+import java.security.MessageDigest
+import kotlin.experimental.and
 
 
 class RestApiCall : AppCompatActivity() {
@@ -40,8 +43,8 @@ class RestApiCall : AppCompatActivity() {
 
         btnSubmitMOD5!!.setOnClickListener {
             val intent = Intent(this@RestApiCall, RegApiSuccess::class.java)
-            intent.putExtra("etxtUserName", etUserName!!.text.toString())
-            intent.putExtra("etxtPassword", etPassword!!.text.toString())
+            intent.putExtra("etxtUserName", convertToMod5(etUserName!!.text.toString()))
+            intent.putExtra("etxtPassword", convertToMod5(etPassword!!.text.toString()))
 
             //doApiVollyCall()
             sendcall()
@@ -119,12 +122,26 @@ class RestApiCall : AppCompatActivity() {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = HashMap<String, String>()
-                params.put("uname", name)
-                params.put("pass", genre)
+                params.put("uname", convertToMod5(name))
+                params.put("pass", convertToMod5(genre))
                 return params
             }
 
         }
         mRequestQueue!!.add(mStringRequest!!)
     }
+
+
+    fun convertToMod5(password: String): String {
+
+        val md = MessageDigest.getInstance("MD5")
+        md.update(password.toByteArray())
+        val byteData = md.digest()
+        val sb = StringBuffer()
+        for (i in byteData.indices)
+            sb.append(Integer.toString((byteData[i] and 0xff.toByte()) + 0x100, 16).substring(1))
+        // println("Digest(in hex format):: " + sb.toString())
+        return sb.toString();
+    }
+
 }
