@@ -21,7 +21,9 @@ import com.android.volley.AuthFailureError
 import com.android.volley.VolleyError
 import com.android.volley.RequestQueue
 import android.provider.SyncStateContract.Helpers.update
+import java.math.BigInteger
 import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import kotlin.experimental.and
 
 
@@ -52,8 +54,8 @@ class RestApiCall : AppCompatActivity() {
         }
         btnSubmitSHA2!!.setOnClickListener {
             val intent = Intent(this@RestApiCall, RegApiSuccess::class.java)
-            intent.putExtra("etxtUserName", etUserName!!.text.toString())
-            intent.putExtra("etxtPassword", etPassword!!.text.toString())
+            intent.putExtra("etxtUserName", convertToSHA512(etUserName!!.text.toString()))
+            intent.putExtra("etxtPassword", convertToSHA512(etPassword!!.text.toString()))
 
             // doApiVollyCall()
             sendcall()
@@ -102,7 +104,7 @@ class RestApiCall : AppCompatActivity() {
 
     fun sendcall() {
         val name = etUserName?.text.toString()
-        val genre = etPassword?.text.toString()
+        val pass = etPassword?.text.toString()
         //RequestQueue initialized
         var mRequestQueue = Volley.newRequestQueue(this)
         var url = "http://10.11.201.52:8084/TestWeb/MD5"
@@ -122,8 +124,8 @@ class RestApiCall : AppCompatActivity() {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = HashMap<String, String>()
-                params.put("uname", convertToMod5(name))
-                params.put("pass", convertToMod5(genre))
+                params.put("uname", name)
+                params.put("pass", pass)
                 return params
             }
 
@@ -131,6 +133,34 @@ class RestApiCall : AppCompatActivity() {
         mRequestQueue!!.add(mStringRequest!!)
     }
 
+    fun convertToSHA512(input: String): String {
+        try {
+            // getInstance() method is called with algorithm SHA-512
+            val md = MessageDigest.getInstance("SHA-512")
+
+            // digest() method is called
+            // to calculate message digest of the input string
+            // returned as array of byte
+            val messageDigest = md.digest(input.toByteArray())
+
+            // Convert byte array into signum representation
+            val no = BigInteger(1, messageDigest)
+
+            // Convert message digest into hex value
+            var hashtext = no.toString(16)
+
+            // Add preceding 0s to make it 32 bit
+            while (hashtext.length < 32) {
+                hashtext = "0$hashtext"
+            }
+
+            // return the HashText
+            return hashtext
+        } catch (e: NoSuchAlgorithmException) {
+            throw RuntimeException(e)
+        }
+        // For specifying wrong message digest algorithms
+    }
 
     fun convertToMod5(password: String): String {
 
