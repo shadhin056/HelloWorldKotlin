@@ -20,7 +20,7 @@
                 android:textColor="?android:attr/colorFocusedHighlight"
                 android:textStyle="bold"/>
         <EditText
-                android:id="@+id/etxtUserName"
+                android:id="@+id/etUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="User Name"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content">
         </RelativeLayout>
         <EditText
-                android:id="@+id/etxtPassword"
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
