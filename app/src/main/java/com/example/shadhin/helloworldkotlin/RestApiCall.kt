@@ -1,6 +1,7 @@
 package com.example.shadhin.helloworldkotlin
 
 import android.content.Intent
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +22,14 @@ import com.android.volley.AuthFailureError
 import com.android.volley.VolleyError
 import com.android.volley.RequestQueue
 import android.provider.SyncStateContract.Helpers.update
+import cn.pedant.SweetAlert.SweetAlertDialog
+import com.example.shadhin.helloworldkotlin.CustomStyle.showProgressDialog
+import com.wajahatkarim3.easyvalidation.core.Validator
+import com.wajahatkarim3.easyvalidation.core.collection_ktx.minLengthList
+import com.wajahatkarim3.easyvalidation.core.collection_ktx.nonEmptyList
+import com.wajahatkarim3.easyvalidation.core.view_ktx.nonEmpty
+import com.wajahatkarim3.easyvalidation.core.view_ktx.validEmail
+import com.wajahatkarim3.easyvalidation.core.view_ktx.validator
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -28,6 +37,7 @@ import kotlin.experimental.and
 
 
 class RestApiCall : AppCompatActivity() {
+    //private  var  checkV=false
 
     private var etUserName: EditText? = null
     private var etPassword: EditText? = null
@@ -37,20 +47,57 @@ class RestApiCall : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rest_api_call)
+
+        //pDialog = showProgressDialog(this@RestApiCall)
         initView()
         define()
     }
 
     private fun define() {
-
         btnSubmitMOD5!!.setOnClickListener {
-            val intent = Intent(this@RestApiCall, RegApiSuccess::class.java)
-            intent.putExtra("etxtUserName", convertToMod5(etUserName!!.text.toString()))
-            intent.putExtra("etxtPassword", convertToMod5(etPassword!!.text.toString()))
 
-            //doApiVollyCall()
-            sendcall()
-            startActivity(intent)
+            var checkV1 = etPassword!!.validator()
+                .nonEmpty()
+                .minLength(8)
+                .atleastOneNumber()
+                .addErrorCallback {
+
+                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                pDialog.setTitleText("Loading");
+                pDialog.setCancelable(false);
+                pDialog.show();
+
+                }
+                .addSuccessCallback {
+                }
+                .check()
+
+
+            var checkV2 = etUserName!!.validator()
+                .nonEmpty()
+                .minLength(8)
+                .atleastOneNumber()
+                .addErrorCallback {
+                   // etUserName!!.error = it
+                   //etPassword!!.error = it
+                    SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText("Something went wrong!")
+                        .show()
+                }
+                .addSuccessCallback {
+
+                }
+                .check()
+
+            if(checkV1 && checkV2){
+                val intent = Intent(this@RestApiCall, RegApiSuccess::class.java)
+                intent.putExtra("etxtUserName", convertToSHA512(etUserName!!.text.toString()))
+                intent.putExtra("etxtPassword", convertToSHA512(etPassword!!.text.toString()))
+                // doApiVollyCall()
+                sendcall()
+                startActivity(intent)
+            }
         }
         btnSubmitSHA2!!.setOnClickListener {
             val intent = Intent(this@RestApiCall, RegApiSuccess::class.java)
@@ -66,6 +113,8 @@ class RestApiCall : AppCompatActivity() {
     private fun initView() {
 
         etUserName = findViewById(R.id.etUserName) as EditText
+
+
         etPassword = findViewById(R.id.etPassword) as EditText
         btnSubmitMOD5 = findViewById(R.id.btnSubmitMOD5) as Button
         btnSubmitSHA2 = findViewById(R.id.btnSubmitSHA2) as Button
