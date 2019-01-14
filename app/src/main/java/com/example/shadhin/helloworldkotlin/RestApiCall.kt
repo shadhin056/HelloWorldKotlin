@@ -16,6 +16,7 @@ import java.util.HashMap
 import com.android.volley.AuthFailureError
 import com.android.volley.VolleyError
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.wajahatkarim3.easyvalidation.core.rules.BaseRule
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validator
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -56,7 +57,7 @@ class RestApiCall : AppCompatActivity() {
             var checkV2 = etUserName!!.validator()
                 .nonEmpty()
                 .minLength(8)
-                .atleastOneNumber()
+                .addRule(HelloRule())
                 .addErrorCallback {
                     SweetAlertDialog(this@RestApiCall, SweetAlertDialog.ERROR_TYPE)
                         .setTitleText("Sorry.").setContentText("User name " + it)
@@ -196,6 +197,21 @@ class RestApiCall : AppCompatActivity() {
             sb.append(Integer.toString((byteData[i] and 0xff.toByte()) + 0x100, 16).substring(1))
         // println("Digest(in hex format):: " + sb.toString())
         return sb.toString();
+    }
+    class HelloRule : BaseRule
+    {
+        // add your validation logic in this method
+        override fun validate(text: String) : Boolean
+        {
+            // Apply your validation rule logic here
+            return text.contains("hello")
+        }
+
+        // Add your invalid check message here
+        override fun getErrorMessage() : String
+        {
+            return "Text should contain 'hello' keyword"
+        }
     }
 
 }
